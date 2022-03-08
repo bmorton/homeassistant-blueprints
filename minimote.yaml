@@ -76,19 +76,19 @@ action:
   - variables:
       scene_id: "{{ trigger.event.data.value }}"
   - choose:
-      - conditions: "{{ scene_id == '1' }}"
+      - conditions: "{{ scene_id == 1 }}"
         sequence: !input button_1
-      - conditions: "{{ scene_id == '2' }}"
+      - conditions: "{{ scene_id == 2 }}"
         sequence: !input button_2
-      - conditions: "{{ scene_id == '3' }}"
+      - conditions: "{{ scene_id == 3 }}"
         sequence: !input button_3
-      - conditions: "{{ scene_id == '4' }}"
+      - conditions: "{{ scene_id == 4 }}"
         sequence: !input button_4
-      - conditions: "{{ scene_id == '5' }}"
+      - conditions: "{{ scene_id == 5 }}"
         sequence: !input button_5
-      - conditions: "{{ scene_id == '6' }}"
+      - conditions: "{{ scene_id == 6 }}"
         sequence: !input button_6
-      - conditions: "{{ scene_id == '7' }}"
+      - conditions: "{{ scene_id == 7 }}"
         sequence: !input button_7
-      - conditions: "{{ scene_id == '8' }}"
+      - conditions: "{{ scene_id == 8 }}"
         sequence: !input button_8
