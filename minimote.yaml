@@ -1,0 +1,96 @@
+---
+blueprint:
+  name: Aeotec DSA03202W-ZWUS Minimote
+  description: Create automations for the Aeotec DSA03202W-ZWUS Minimote using the Z-Wave JS integration
+  domain: automation
+  input:
+    aeotec_nanomote:
+      name: Aeotec Minimote
+      description: The Minimote to interact with.
+      selector:
+        device:
+          integration: zwave_js
+          manufacturer: AEON Labs
+          model: DSA03XXX-ZW
+    button_1:
+      name: Press Button One
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+    button_2:
+      name: Hold Button One
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+    button_3:
+      name: Press Button Two
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+    button_4:
+      name: Hold Button Two
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+    button_5:
+      name: Press Button Three
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+    button_6:
+      name: Hold Button Three
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+    button_7:
+      name: Press Button Four
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+    button_8:
+      name: Hold Button Four
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+
+
+mode: single
+
+max_exceeded: silent
+
+trigger:
+  platform: event
+  event_type: zwave_js_event
+  event_data:
+    command_class_name: Scene Activation
+    property: sceneId
+    device_id: !input aeotec_nanomote
+
+action:
+  - variables:
+      scene_id: "{{ trigger.event.data.value }}"
+  - choose:
+      - conditions: "{{ scene_id == '1' }}"
+        sequence: !input button_1
+      - conditions: "{{ scene_id == '2' }}"
+        sequence: !input button_2
+      - conditions: "{{ scene_id == '3' }}"
+        sequence: !input button_3
+      - conditions: "{{ scene_id == '4' }}"
+        sequence: !input button_4
+      - conditions: "{{ scene_id == '5' }}"
+        sequence: !input button_5
+      - conditions: "{{ scene_id == '6' }}"
+        sequence: !input button_6
+      - conditions: "{{ scene_id == '7' }}"
+        sequence: !input button_7
+      - conditions: "{{ scene_id == '8' }}"
+        sequence: !input button_8
