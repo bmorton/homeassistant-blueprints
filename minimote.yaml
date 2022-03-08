@@ -4,7 +4,7 @@ blueprint:
   description: Create automations for the Aeotec DSA03202W-ZWUS Minimote using the Z-Wave JS integration
   domain: automation
   input:
-    aeotec_nanomote:
+    aeotec_minimote:
       name: Aeotec Minimote
       description: The Minimote to interact with.
       selector:
@@ -68,11 +68,11 @@ max_exceeded: silent
 
 trigger:
   platform: event
-  event_type: zwave_js_event
+  event_type: zwave_js_value_notification
   event_data:
     command_class_name: Scene Activation
     property: sceneId
-    device_id: !input aeotec_nanomote
+    device_id: !input aeotec_minimote
 
 action:
   - variables:
