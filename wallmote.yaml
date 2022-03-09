@@ -1,0 +1,62 @@
+---
+blueprint:
+  name: Aeotec ZW130 Wallmote
+  description: Create automations for the Aeotec ZW130 Wallmote using the Z-Wave JS integration
+  domain: automation
+  input:
+    aeotec_wallmote:
+      name: Aeotec Wallmote
+      description: The Wallmote to interact with.
+      selector:
+        device:
+          integration: zwave_js
+          manufacturer: AEON Labs
+          model: ZW130
+    button_1:
+      name: Press Button One (top left)
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+    button_2:
+      name: Press Button Two (top right)
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+    button_3:
+      name: Press Button Three (bottom left)
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+    button_4:
+      name: Press Button Four (bottom right)
+      description: Action to run on button press.
+      default: []
+      selector:
+        action: {}
+
+
+mode: single
+
+max_exceeded: silent
+
+trigger:
+  platform: event
+  event_type: zwave_js_value_notification
+  event_data:
+    value: KeyPressed
+    device_id: !input aeotec_wallmote
+action:
+  - variables:
+      scene_id: "{{ trigger.event.data.property_key }}"
+  - choose:
+      - conditions: "{{ scene_id == '001' }}"
+        sequence: !input button_1
+      - conditions: "{{ scene_id == '002' }}"
+        sequence: !input button_2
+      - conditions: "{{ scene_id == '003' }}"
+        sequence: !input button_3
+      - conditions: "{{ scene_id == '004' }}"
+        sequence: !input button_4
