@@ -70,7 +70,7 @@ trigger:
   platform: event
   event_type: zwave_js_value_notification
   event_data:
-    propertyName: sceneId
+    property_name: sceneId
     device_id: !input aeotec_minimote
 action:
   - variables:
